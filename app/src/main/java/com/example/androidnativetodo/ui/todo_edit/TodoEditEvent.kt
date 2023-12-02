@@ -7,4 +7,6 @@ sealed class TodoEditEvent {
   data class OnDeadlineChange(val value: String): TodoEditEvent()
 
   object OnSaveTodo: TodoEditEvent()
+
+  object OnBackButtonTap: TodoEditEvent()
 }

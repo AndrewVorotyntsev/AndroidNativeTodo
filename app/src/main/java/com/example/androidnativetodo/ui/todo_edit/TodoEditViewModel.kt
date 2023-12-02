@@ -79,6 +79,9 @@ class TodoEditViewModel @Inject constructor(
           }
         }
       }
+      is TodoEditEvent.OnBackButtonTap -> {
+        sendUiEvent(UiEvent.PopBackStack)
+      }
     }
   }
 

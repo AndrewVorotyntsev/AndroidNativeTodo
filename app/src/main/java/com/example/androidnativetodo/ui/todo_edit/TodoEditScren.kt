@@ -9,18 +9,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.androidnativetodo.utils.UiEvent
-import kotlinx.coroutines.flow.collect
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -37,12 +40,33 @@ fun TodoEditScreen(
     }
   }
   Scaffold (
+    topBar = {
+      TopAppBar(
+        backgroundColor = Color.White,
+        title = {
+          if (viewModel.todo == null)
+            Text("Новая заметка")
+          else Text("Редактировать заметку")
+        },
+        navigationIcon = {
+          IconButton(
+            onClick = {
+              viewModel.onEvent(TodoEditEvent.OnBackButtonTap)
+            }
+          ) {
+            Icon(
+              imageVector = Icons.Filled.ArrowBack,
+              contentDescription = "Back"
+            )
+          }
+        }
+      )
+    },
     modifier = Modifier
-      .fillMaxSize()
-      .padding(16.dp)
+      .fillMaxSize(),
   ) {
     Column(
-      modifier = Modifier.fillMaxSize(),
+      modifier = Modifier.fillMaxSize().padding(16.dp),
     ) {
       TextField(
         value = viewModel.title,
