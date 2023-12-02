@@ -20,10 +20,10 @@ interface TodoDao {
   @Delete
   suspend fun deleteTodoItem(todoEntity: TodoEntity)
 
-  @Query("SELECT * FROM todo WHERE id = :id")
+  @Query("SELECT * FROM TodoEntity WHERE id = :id")
   suspend fun getTodoItemById(id: Int): TodoEntity?
 
   // Как только БД изменится это вызовет функцию
-  @Query("SELECT * FROM todo")
+  @Query("SELECT * FROM TodoEntity")
   fun getTodos(): Flow<List<TodoEntity>>
 }
