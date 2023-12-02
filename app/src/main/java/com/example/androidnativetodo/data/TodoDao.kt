@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 interface TodoDao {
   // suspend - значит асинхронная операция
 
+  // Стратегия на случай конфликта подразумевает редактирование существующей заметки
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   suspend fun insertTodoItem(todoEntity: TodoEntity)
 
